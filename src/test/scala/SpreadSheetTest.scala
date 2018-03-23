@@ -1,17 +1,37 @@
 import expr._
-import spreadsheet._
 import org.scalatest._
+import spreadsheet._
 
 class SpreadSheetTest extends FlatSpec with Matchers {
-  "3 + 1" should "equal 4 when evalutated in a spreadsheet" in {
-    var spreadSheet = SpreadSheet()
 
-    // Copy the sum expression from ExprTest.scala
-    val three: Expr = // Create a constant Expr here.
-    val one: Expr = // Create a constant Expr here.
-    val sum: Expr = // Create an add Expr here.
-
-    // add sum to spreadSheet at ('a', 3)
-    spreadSheet.eval(Position('a', 3)) should be (Some(4))
+  def fixture = new {
+    val spreadSheet = new SpreadSheet()
   }
+
+  val one: Expr = Constant(1)
+  val two: Expr = Constant(2)
+  val three: Expr = Constant(3)
+  val sum13: Expr = Add(three, one)
+  val mul23: Expr = Mul(two, three)
+
+  "3 + 1" should "equal 4 when evaluated in a spreadsheet" in {
+    val fix = fixture
+    fix.spreadSheet.eval(Position('a', 3)) should be(None)
+    fix.spreadSheet.add(Position('a', 3), sum13).eval(Position('a', 3)) should be(Some(4))
+  }
+
+  "3 * 2" should "equal 6 when evaluated in a spreadsheet" in {
+    val fix = fixture
+    fix.spreadSheet.eval(Position('a', 3)) should be(None)
+    fix.spreadSheet.add(Position('a', 3), mul23).eval(Position('a', 3)) should be(Some(6))
+  }
+
+  "remove" should "remove expr element from position in spreadsheet if any" in {
+    val fix = fixture
+    fix.spreadSheet.eval(Position('a', 3)) should be(None)
+    val addition = fix.spreadSheet.add(Position('a', 3), sum13)
+    addition.eval(Position('a', 3)) should be(Some(4))
+    addition.remove(Position('a', 3)).eval(Position('a', 3)) should be(None)
+  }
+
 }

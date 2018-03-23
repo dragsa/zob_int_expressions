@@ -8,7 +8,7 @@ class ParserTest extends FlatSpec with Matchers {
         how you handle cell references.
      */
     val expr: Expr = Expr.fromString("+ 3 1")
-    expr.value() should be (4)
+    expr.value should be (4)
   }
 
   "3 + 1 * 4" should "equal 4 when the expression is parsed from string" in {
@@ -16,6 +16,6 @@ class ParserTest extends FlatSpec with Matchers {
         how you handle cell references.
      */
     val expr: Expr = Expr.fromString("+ 3 * 1 4")
-    expr.value() should be (4)
+    expr.value should be (4)
   }
 }
