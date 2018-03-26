@@ -1,4 +1,4 @@
 time estimation:
 	architecture:   30 min
-	development:    90 min
+	development:    180 min
 	testing:        60 min
