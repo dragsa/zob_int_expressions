@@ -60,9 +60,9 @@ operators, postfix operators, or prefix operators.
 
 The tokens in the input string should be:
 
-- *
-- +
-- integers
-- Cell refs, which are a character followed by an integer, i.e `a10`
+-- *  
+--  +  
+-- integers  
+-- Cell refs, which are a character followed by an integer, i.e `a10`
 
 Once you have finished this task, you should be able to run ParserTest.scala.
