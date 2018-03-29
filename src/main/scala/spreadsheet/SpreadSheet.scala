@@ -20,8 +20,8 @@ case class SpreadSheet(storage: Map[Position, Expr] = Map()) {
 }
 
 object SpreadSheet {
-  implicit def posToVal(pos: Position)(implicit sd: SpreadSheet): Expr = {
-    implicitly[SpreadSheet].get(pos).getOrElse(Constant(0))
+  implicit def posToVal(pos: Position)(implicit sh: SpreadSheet): Expr = {
+    sh.get(pos).getOrElse(Constant(0))
   }
 }
 

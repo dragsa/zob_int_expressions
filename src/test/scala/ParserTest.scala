@@ -21,6 +21,13 @@ class ParserTest extends FlatSpec with Matchers {
     expr.value should be (4)
   }
 
+  "4 + 3 + 1 * 6" should "equal 13 when the expression is parsed from string" in {
+    val fix = fixture
+    implicit val firstAddition = fix.spreadSheet
+    val expr: Expr = Expr.fromString("+ * 6 1 + 3 4")
+    expr.value should be (13)
+  }
+
   "3 + 1 * 4" should "equal 7 when the expression is parsed from string" in {
     val fix = fixture
     implicit val firstAddition = fix.spreadSheet

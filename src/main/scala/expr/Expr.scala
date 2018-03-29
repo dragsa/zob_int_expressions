@@ -3,19 +3,45 @@ package expr
 import spreadsheet.{Position, SpreadSheet}
 
 sealed trait Expr {
-  def value: Long
+  val value: Long
+//   eager
+//  def value: Long
 }
 
 case class Constant(a: Long) extends Expr {
-  def value: Long = a
+  override lazy val value: Long = {
+    println(s"calculating lazy Const for ($a)")
+    a
+  }
+  // eager
+//  def value: Long = {
+//    println(s"calculating eager Const for ($a)")
+//    a
+//  }
 }
 
 case class Mul(a: Expr, b: Expr) extends Expr {
-  def value: Long = a.value * b.value
+  override lazy val value: Long = {
+    println(s"calculating lazy Mul for ($a, $b)")
+    a.value * b.value
+  }
+  // eager
+//  def value: Long = {
+//    println(s"calculating eager Const for ($a)")
+//    a.value * b.value
+//  }
 }
 
 case class Add(a: Expr, b: Expr) extends Expr {
-  def value: Long = a.value + b.value
+  override lazy val value: Long = {
+    println(s"calculating lazy Add for ($a, $b)")
+    a.value + b.value
+  }
+  // eager
+//  def value: Long = {
+//    println(s"calculating eager Add for ($a, $b)")
+//    a.value + b.value
+//  }
 }
 
 object Expr {

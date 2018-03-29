@@ -16,6 +16,13 @@ class ExprTest extends FlatSpec with Matchers {
     sum1331.value should be (8)
   }
 
+  // should be even more lazy
+  "(1 + 3) + (1 + 3)" should "equal 8 when evaluated as an expression tree" in {
+    val sum13 = Add(one, three)
+    val sum1313 = Add(sum13, sum13)
+    sum1313.value should be (8)
+  }
+
   "2 * 3" should "equal 6 when evaluated as an expression tree" in {
     val mul23 = Mul(two, three)
     mul23.value should be (6)
